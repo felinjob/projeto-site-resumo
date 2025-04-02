@@ -1,36 +1,67 @@
-import React, { FC } from 'react'
-import Box from '@mui/material/Box'
-import Grid from '@mui/material/Grid'
-import Container from '@mui/material/Container'
-import Typography from '@mui/material/Typography'
-import { FooterNavigation, FooterSocialLinks } from '@/components/footer'
+// src/components/footer/footer.tsx
+import React, { FC } from 'react';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+// Importar animateScroll diretamente
+import { animateScroll } from 'react-scroll';
+// ScrollLink e Logo não são mais usados neste componente
 
-const Footer: FC = () => {
+// Função para rolar para o topo - Usando animateScroll diretamente
+const scrollToTop = (): void => {
+  // Chama o método no objeto importado diretamente
+  animateScroll.scrollToTop({ // <-- Corrigido aqui
+    duration: 500,
+    smooth: true,
+  });
+};
+
+const Footer: FC = (): JSX.Element => {
+  const currentYear = new Date().getFullYear();
+
   return (
     <Box
       component="footer"
-      sx={{ backgroundColor: 'primary.main', py: { xs: 6, md: 10 }, color: 'primary.contrastText' }}
+      sx={{
+        backgroundColor: 'background.paper', // Fundo branco/papel
+        py: 3,
+        textAlign: 'center',
+        color: 'text.secondary',
+      }}
     >
-      <Container>
-        <Grid container spacing={1}>
-          <Grid item xs={12} md={5}>
-            <Box sx={{ width: { xs: '100%', md: 360 }, mb: { xs: 3, md: 0 } }}>
-              <Typography component="h2" variant="h2" sx={{ mb: 2 }}>
-                Coursespace
-              </Typography>
-              <Typography variant="subtitle1" sx={{ letterSpacing: 1, mb: 2 }}>
-                Coursespace is an online learning platform that has been operating since 2018 until now.
-              </Typography>
-              <FooterSocialLinks />
-            </Box>
-          </Grid>
-          <Grid item xs={12} md={7}>
-            <FooterNavigation />
-          </Grid>
-        </Grid>
+      <Container maxWidth="lg">
+        {/* Logo comentado */}
+        {/* <Box sx={{ mb: 1 }}><Logo sx={{ '& .MuiTypography-root': { color: 'text.secondary' } }} /></Box> */}
+
+        {/* Texto de Copyright */}
+        <Typography variant="body2" sx={{ mb: 1 }}>
+          © {currentYear} Resumo Concursos | Produzido por Raquel Morais & Valdinei Castro
+        </Typography>
+        <Typography variant="caption" display="block" sx={{ mb: 2 }}>
+          Material protegido pela Lei Federal nº 9.610/1998. Proibida a reprodução e distribuição não autorizadas.
+        </Typography>
+
+        {/* Botão Voltar ao Topo */}
+        <IconButton
+          onClick={scrollToTop}
+          aria-label="Voltar ao topo"
+          color="primary" // Usa cor primária (azul)
+          sx={{
+             border: '1px solid',
+             borderColor: 'primary.light',
+             '&:hover': {
+                backgroundColor: 'primary.light',
+             }
+           }}
+        >
+          <KeyboardArrowUpIcon />
+        </IconButton>
+
       </Container>
     </Box>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

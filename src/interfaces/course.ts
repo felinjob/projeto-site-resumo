@@ -1,9 +1,7 @@
 export interface Course {
-  id: number | string
-  title: string
-  cover: string
-  rating: number
-  ratingCount: number
-  price: number
-  category: string
+  id: number;
+  cover: string;
+  title: string;
+  subtitle: string; // Campo para o subtítulo
+  status: string;   // Campo para status (ex: "Disponível" ou "30/04/25")
 }

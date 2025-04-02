@@ -1,68 +1,33 @@
-import React, { FC, useState } from 'react'
-import Box from '@mui/material/Box'
-import Container from '@mui/material/Container'
-import IconButton from '@mui/material/IconButton'
-import useMediaQuery from '@mui/material/useMediaQuery'
-import { Logo } from '@/components/logo'
-import { Navigation, AuthNavigation } from '@/components/navigation'
-import { useTheme } from '@mui/material/styles'
-import { Menu, Close } from '@mui/icons-material'
+import React from 'react';
+import { AppBar, Toolbar, Typography, Box, Container } from '@mui/material';
+import { Logo } from '../logo';
+import { Navigation } from '../navigation';
 
-const Header: FC = () => {
-  const [visibleMenu, setVisibleMenu] = useState<boolean>(false)
-  const { breakpoints } = useTheme()
-  const matchMobileView = useMediaQuery(breakpoints.down('md'))
-
+const Header: React.FC = () => {
   return (
-    <Box sx={{ backgroundColor: 'background.paper' }}>
-      <Container sx={{ py: { xs: 2, md: 3 } }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Logo />
-          <Box sx={{ ml: 'auto', display: { xs: 'inline-flex', md: 'none' } }}>
-            <IconButton onClick={() => setVisibleMenu(!visibleMenu)}>
-              <Menu />
-            </IconButton>
+    <AppBar position="sticky" sx={{ backgroundColor: 'background.paper', boxShadow: 'none' }}>
+      <Container maxWidth="lg">
+        <Toolbar disableGutters sx={{ minHeight: 70 }}>
+          <Box sx={{ mr: 2 }}>
+            <Logo />
           </Box>
-          <Box
+          <Typography
+            variant="h6"
+            component="h1"
             sx={{
-              width: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              flexDirection: { xs: 'column', md: 'row' },
-
-              transition: (theme) => theme.transitions.create(['top']),
-              ...(matchMobileView && {
-                py: 6,
-                backgroundColor: 'background.paper',
-                zIndex: 'appBar',
-                position: 'fixed',
-                height: { xs: '100vh', md: 'auto' },
-                top: visibleMenu ? 0 : '-120vh',
-                left: 0,
-              }),
+              fontWeight: 700,
+              letterSpacing: '-1px',
+              color: 'var(--color-text-primary)',
+              flexGrow: 1,
             }}
           >
-            <Box /> {/* Magic space */}
-            <Navigation />
-            <AuthNavigation />
-            {visibleMenu && matchMobileView && (
-              <IconButton
-                sx={{
-                  position: 'fixed',
-                  top: 10,
-                  right: 10,
-                }}
-                onClick={() => setVisibleMenu(!visibleMenu)}
-              >
-                <Close />
-              </IconButton>
-            )}
-          </Box>
-        </Box>
+          </Typography>
+          <Navigation />
+          {/* Removed AuthNavigation */}
+        </Toolbar>
       </Container>
-    </Box>
-  )
-}
+    </AppBar>
+  );
+};
 
-export default Header
+export default Header;

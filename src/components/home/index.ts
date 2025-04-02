@@ -1,6 +1,7 @@
-export { default as HomeHero } from './hero'
-export { default as HomePopularCourse } from './popular-courses'
-export { default as HomeFeature } from './feature'
-export { default as HomeTestimonial } from './testimonial'
-export { default as HomeOurMentors } from './mentors'
-export { default as HomeNewsLetter } from './newsletter'
+// src/components/home/index.ts
+export { default as HomeHero } from './hero';
+export { default as HomeFeature } from './feature';
+export { default as HomeQuemSomos } from './quem-somos';
+export { default as HomeConteudoResumos } from './conteudo-resumos';
+export { default as HomeCronogramaResumos } from './cronograma-resumos';
+export { default as HomeCompraFinal } from './compra-final'; // ADICIONAR

@@ -1,20 +1,25 @@
-import type { Navigation } from '@/interfaces/navigation'
+// src/components/navigation/navigation.data.ts
+import type { Navigation } from '@/interfaces/navigation';
 
 export const navigations: Navigation[] = [
   {
-    label: 'Home',
-    path: '#', // '/',
+    label: 'Início',
+    path: 'hero', // ID da seção inicial
   },
   {
-    label: 'Courses',
-    path: 'popular-course', // '/popular-course',
+    label: 'Resumos',
+    path: 'conteudo', // ID da seção de conteúdo/resumos
   },
   {
-    label: 'Testimonial',
-    path: 'testimonial', // '/testimonial',
+    label: 'Cronograma',
+    path: 'cronograma', // ID da seção do cronograma
   },
   {
-    label: 'Mentor',
-    path: 'mentors', // '/mentors',
+    label: 'Sobre',
+    path: 'quem-somos', // ID da seção dos autores
   },
-]
+  {
+    label: 'Compra', // Alterado de Contato para Compra
+    path: 'comprar',  // ID da seção de compra/CTA final
+  },
+];
