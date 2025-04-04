@@ -92,7 +92,7 @@ const HomePopularCourse: FC = () => {
         pt: { xs: 6, md: 8
 
          },
-        pb: 8,
+        pb: 10,
         backgroundColor: 'grey.100',
         overflow: 'hidden' // Adicionado para garantir que padding não cause overflow
       }}

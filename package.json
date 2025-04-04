@@ -1,6 +1,6 @@
 {
-  "name": "coursespace-landing-page",
-  "version": "0.1.0",
+  "name": "site-resumos",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",

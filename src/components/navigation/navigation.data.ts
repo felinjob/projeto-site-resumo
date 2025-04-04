@@ -15,7 +15,7 @@ export const navigations: Navigation[] = [
     path: 'cronograma', // ID da seção do cronograma
   },
   {
-    label: 'Sobre',
+    label: 'Quem Somos',
     path: 'quem-somos', // ID da seção dos autores
   },
   {

@@ -1,25 +1,26 @@
 import type { Course } from '@/interfaces/course'
 
 export const data: Array<Course> = [
+  
   {
     id: 1,
-    cover: '/images/imagens_leis/seguranca-incendio.png',
-    title: 'Segurança Contra Incêndio',
-    subtitle: 'Decreto nº 63.911/2018',
-    status: 'Disponível',
-  },
-  {
-    id: 2,
     cover: '/images/imagens_leis/plano-estrategico.png',
     title: 'Plano Diretor Estratégico',
     subtitle: 'LC nº 189/2018',
     status: 'Disponível',
   },
   {
-    id: 3,
+    id: 2,
     cover: '/images/imagens_leis/perimetro-urbano.png',
     title: 'Perímetro Urbano e ZEU',
     subtitle: 'LC nº 207/2018',
+    status: 'Disponível',
+  },
+  {
+    id: 3,
+    cover: '/images/imagens_leis/seguranca-incendio.png',
+    title: 'Segurança Contra Incêndio',
+    subtitle: 'Decreto nº 63.911/2018',
     status: 'Disponível',
   },
   {

@@ -40,7 +40,7 @@ const HomeCompraFinal: FC = () => {
             component="h2"
             sx={{ mb: 2, fontWeight: 'bold', color: 'primary.dark' }}
           >
-            Invista na sua Aprovação Agora!
+            Invista na sua aprovação agora!
           </Typography>
 
           {/* Subtítulo dentro do Paper */}
@@ -55,7 +55,7 @@ const HomeCompraFinal: FC = () => {
             <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 1, mb: 1 }}>
               <LocalOfferIcon color="secondary" />
               <Typography variant="h6" sx={{ color: 'secondary.dark', fontWeight:'medium' }}>
-                Oferta Especial de Lançamento!
+                Oferta especial de lançamento
               </Typography>
             </Box>
 
@@ -95,7 +95,7 @@ const HomeCompraFinal: FC = () => {
                '&:hover': { backgroundColor: 'secondary.dark' }
             }}
           >
-            Comprar com Desconto!
+            EU QUERO!
           </Button>
 
           {/* Informações Adicionais dentro do Paper */}

@@ -4,51 +4,34 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
+
+// Importar Ícones
 import TrackChangesIcon from '@mui/icons-material/TrackChanges';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
-import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates';
+import SlideshowIcon from '@mui/icons-material/Slideshow';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import BoltIcon from '@mui/icons-material/Bolt';
-import GavelIcon from '@mui/icons-material/Gavel';
+import GradingIcon from '@mui/icons-material/Grading';
 
+// Interface
 interface FeatureItem {
   icon: React.ElementType;
   title: string;
   description: string;
 }
 
-// Dados das features - AJUSTE OS TEXTOS E ÍCONES CONFORME PREFERIR
-const features: FeatureItem[] = [
-  {
-    icon: TrackChangesIcon,
-    title: 'Conteúdo Focado',
-    description: 'Sem enrolação. Apenas o que você precisa saber sobre a legislação exigida no edital para Arquiteto.',
-  },
-  {
-    icon: AccountTreeIcon,
-    title: 'Material Esquematizado',
-    description: 'Diagramas, tabelas e resumos visuais para facilitar a compreensão e a memorização dos pontos-chave.',
-  },
-  {
-    icon: TipsAndUpdatesIcon,
-    title: 'Sempre Atualizado',
-    description: 'Conteúdo revisado e atualizado conforme as últimas versões das leis e decretos, incluindo o Edital 01/2025.',
-  },
-  {
-    icon: VerifiedUserIcon,
-    title: 'Feito por Especialistas',
-    description: 'Elaborado por arquiteta concursada (TRF) e arquiteto atuante na Prefeitura de Campinas.',
-  },
-  {
-    icon: BoltIcon,
-    title: 'Economize seu Tempo',
-    description: 'Otimize seus estudos acessando diretamente as informações mais relevantes, sem perder tempo com leitura extensiva.',
-  },
-  {
-    icon: GavelIcon,
-    title: 'Legislação de Campinas',
-    description: 'Cobertura completa das Leis Complementares, Decretos e normas municipais e estaduais específicas do edital.',
-  },
+// Dados Bloco 1
+const featuresAcesso: FeatureItem[] = [
+  { icon: TrackChangesIcon, title: 'Resumos Direto ao Ponto', description: 'Material 100% focado na legislação do edital de Arquiteto para Campinas, sem enrolação e com linguagem clara.' },
+  { icon: AccountTreeIcon, title: 'Layout Esquematizado', description: 'Facilite a memorização com diagramas, tabelas comparativas e destaques visuais estratégicos.' },
+  { icon: SlideshowIcon, title: 'Videoaulas + Questões', description: 'Aulas exclusivas em vídeo com resolução comentada de questões inéditas, focadas no estilo da banca.' },
+];
+
+// Dados Bloco 2
+const featuresDiferenciais: FeatureItem[] = [
+ { icon: VerifiedUserIcon, title: 'Feito por Quem Entende', description: 'Material elaborado por arquitetos nomeados no último concurso do cargo (Edital 08/2019)' },
+ { icon: BoltIcon, title: 'Otimize Seus Estudos', description: 'Ganhe tempo e eficiência estudando diretamente o que é mais relevante e tem maior probabilidade de cair na prova.' },
+ { icon: GradingIcon, title: 'Foco na Banca Vunesp', description: 'Conteúdo e questões elaborados considerando o histórico e o perfil de cobrança da Vunesp, responsável pelo concurso.' },
 ];
 
 const HomeFeature: FC = () => {
@@ -57,73 +40,61 @@ const HomeFeature: FC = () => {
       id="features"
       sx={{
         py: { xs: 6, md: 10 },
-        backgroundColor: 'primary.main', // Fundo cinza claro para destacar os cards
+        // Mudar fundo da seção para azul primário
+        backgroundColor: 'primary.main', // <-- MUDANÇA AQUI
       }}
     >
       <Container maxWidth="lg">
-        {/* Título da Seção com mais destaque */}
-        <Typography
-          component="h2"
-          variant="h2"
-          sx={{
-            textAlign: 'center',
-            mb: { xs: 4, md: 8 },
-            fontWeight: 'bold',
-            color: 'black', // Cor pêssego para o título
-          }}
-        >
-          Por que nossos resumos são a{' '}
-          {/* Palavra "melhor" com destaque */}
-          <Box component="span" sx={{ color: 'secondary.main' }}> {/* Cor amarela/laranja */}
-            melhor
-          </Box>{' '}
-          escolha?
-        </Typography>
+        {/* === Bloco 1: Acesso === */}
+        <Box mb={{ xs: 6, md: 8 }}>
+          <Typography
+            component="h1"
+            variant="h1"
+            // Mudar cor do título para branco (contraste com fundo azul)
+            sx={{ textAlign: 'center', mb: { xs: 4, md: 6 }, fontWeight: 'bold', color: 'primary.contrastText' }} // <-- MUDANÇA AQUI
+          >
+            Ao que você terá acesso:
+          </Typography>
+          <Grid container spacing={3}>
+            {featuresAcesso.map(({ icon: Icon, title, description }, index) => (
+              <Grid item xs={12} sm={6} md={4} key={`acesso-${index}`}>
+                {/* Card mantém fundo branco e sombra */}
+                <Box sx={{ textAlign: 'center', p: 3, backgroundColor: 'background.paper', borderRadius: '12px', boxShadow: 2, height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <Box sx={{ mb: 2.5 }}> <Icon sx={{ fontSize: 45, color: 'secondary.main' }} /> </Box> {/* Ícone Amarelo */}
+                  <Typography variant="h6" component="h3" sx={{ mb: 1.5, fontWeight: 'bold', color: 'text.primary' }}> {title} </Typography> {/* Texto escuro */}
+                  <Typography variant="body2" sx={{ color: 'text.secondary', lineHeight: 1.6, flexGrow: 1 }}> {description} </Typography> {/* Texto cinza */}
+                </Box>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
 
-        {/* Grid com as Features */}
-        <Grid container spacing={3}>
-          {features.map(({ icon: Icon, title, description }, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
-              {/* Box de cada feature com relevo */}
-              <Box
-                sx={{
-                  textAlign: 'center',
-                  p: 3,
-                  backgroundColor: 'background.paper',
-                  borderRadius: '12px',
-                  boxShadow: 2, // Mantém o relevo/sombra
-                  height: '100%',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center'
-                }}
-              >
-                {/* Ícone */}
-                <Box
-                  sx={{
-                    mb: 2.5,
-                  }}
-                >
-                   <Icon sx={{ fontSize: 45, color: 'secondary.main' }} />
+        {/* === Bloco 2: Diferenciais === */}
+        <Box>
+          <Typography
+            component="h2"
+            variant="h2"
+             // Mudar cor do título para branco (contraste com fundo azul)
+            sx={{ textAlign: 'center', mb: { xs: 4, md: 6 }, fontWeight: 'bold', color: 'primary.contrastText' }} // <-- MUDANÇA AQUI
+          >
+            Por que nossos resumos são a{' '}
+            {/* Destaque "melhor" mantém amarelo */}
+            <Box component="span" sx={{ color: 'secondary.main' }}> melhor </Box>{' '}
+            escolha?
+          </Typography>
+          <Grid container spacing={3}>
+            {featuresDiferenciais.map(({ icon: Icon, title, description }, index) => (
+              <Grid item xs={12} sm={6} md={4} key={`diferencial-${index}`}>
+                 {/* Card mantém fundo branco e sombra */}
+                 <Box sx={{ textAlign: 'center', p: 3, backgroundColor: 'background.paper', borderRadius: '12px', boxShadow: 2, height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                   <Box sx={{ mb: 2.5 }}> <Icon sx={{ fontSize: 45, color: 'secondary.main' }} /> </Box> {/* Ícone Amarelo */}
+                   <Typography variant="h6" component="h3" sx={{ mb: 1.5, fontWeight: 'bold', color: 'text.primary' }}> {title} </Typography> {/* Texto escuro */}
+                   <Typography variant="body2" sx={{ color: 'text.secondary', lineHeight: 1.6, flexGrow: 1 }}> {description} </Typography> {/* Texto cinza */}
                  </Box>
-
-                {/* Título da Feature */}
-                <Typography
-                  variant="h6"
-                  component="h3"
-                  sx={{ mb: 1.5, fontWeight: 'bold', color: 'text.primary' }}
-                >
-                  {title}
-                </Typography>
-
-                {/* Descrição da Feature */}
-                <Typography variant="body2" sx={{ color: 'text.secondary', lineHeight: 1.6, flexGrow: 1 }}>
-                  {description}
-                </Typography>
-              </Box>
-            </Grid>
-          ))}
-        </Grid>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
       </Container>
     </Box>
   );

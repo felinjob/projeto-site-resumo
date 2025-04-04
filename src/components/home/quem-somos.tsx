@@ -20,8 +20,8 @@ const HomeQuemSomos: FC = () => {
     >
       <Container maxWidth="lg">
         {/* Título da Seção */}
-        <Typography variant="h2" sx={{ textAlign: 'center', mb: { xs: 4, md: 6 }, fontWeight: 'bold' }}>
-          Conheça os Autores
+        <Typography variant="h1" sx={{ textAlign: 'center', mb: { xs: 4, md: 6 }, fontWeight: 'bold' }}>
+          Quem Somos
         </Typography>
 
         {/* Grid para os cards */}
