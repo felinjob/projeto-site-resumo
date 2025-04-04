@@ -53,7 +53,7 @@ const HomeFeature: FC = () => {
             // Mudar cor do título para branco (contraste com fundo azul)
             sx={{ textAlign: 'center', mb: { xs: 4, md: 6 }, fontWeight: 'bold', color: 'primary.contrastText' }} // <-- MUDANÇA AQUI
           >
-            Ao que você terá acesso:
+            Materiais que você terá acesso
           </Typography>
           <Grid container spacing={3}>
             {featuresAcesso.map(({ icon: Icon, title, description }, index) => (

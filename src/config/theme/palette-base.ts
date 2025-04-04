@@ -1,44 +1,53 @@
 // src/config/theme/palette-base.ts
 import { PaletteOptions } from '@mui/material';
-import { blue, grey, orange } from '@mui/material/colors'; // Importar cores base
+import { grey, orange, common } from '@mui/material/colors'; // Removido blue, yellow não usados diretamente
 
-// Azul primário
-const primaryBlue = '#0084d8';
-const primaryBlueLight = '#65b3f7';
-const primaryBlueDark = '#0058a5';
+// COR PRIMÁRIA: Novo Azul
+const primaryBlue = '#0877ac';       // <-- SEU NOVO AZUL PRINCIPAL
+const primaryBlueLight = '#5faadd';  // <-- Variação Clara Gerada*
+const primaryBlueDark = '#045a80';   // <-- Variação Escura Gerada*
 
-// Amarelo/Laranja secundário (baseado no original do template)
+// COR SECUNDÁRIA: Amarelo/Laranja (Mantida)
 const secondaryYellow = '#ffaf35';
-const secondaryYellowLight = '#fde6a8'; // Tom mais claro
-const secondaryYellowDark = '#d0821c';  // Tom mais escuro
-const secondaryYellowContrastText = grey[900]; // Texto escuro (quase preto) para contraste
+const secondaryYellowLight = '#fde6a8';
+const secondaryYellowDark = '#d0821c';
+const secondaryYellowContrastText = grey[900]; // Texto escuro
 
 const paletteBase: Partial<PaletteOptions> = {
   primary: {
     light: primaryBlueLight,
     main: primaryBlue,
     dark: primaryBlueDark,
-    contrastText: '#ffffff', // Texto branco sobre azul
+    contrastText: common.white, // Texto branco sobre azul ainda funciona
   },
   secondary: {
-    // Reintroduzindo o amarelo/laranja
+    // Mantido o amarelo/laranja
     light: secondaryYellowLight,
     main: secondaryYellow,
     dark: secondaryYellowDark,
-    contrastText: secondaryYellowContrastText, // Texto escuro sobre amarelo/laranja
+    contrastText: secondaryYellowContrastText,
   },
   success: {
-     main: '#2e7d32', // Verde padrão
+     main: '#2e7d32', // Verde
   },
   warning: {
-     // Usar um laranja um pouco diferente para warning ou o próprio secundário
-     main: orange[800], // '#ef6c00'
+     main: orange[700], // Laranja
   },
   error: {
-     main: '#d32f2f', // Vermelho padrão
+     main: '#d32f2f', // Vermelho
   },
-  // Manter tons de cinza úteis
+  // Definições padrão de texto e fundo (geralmente sobrescritas por palette-light.ts)
+  text: {
+    primary: grey[900],
+    secondary: grey[700],
+    disabled: grey[500],
+  },
+  background: {
+     paper: common.white,
+     default: common.white,
+   },
   grey: grey,
+  common: common,
 };
 
 export default paletteBase;
