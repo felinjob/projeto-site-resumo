@@ -20,7 +20,7 @@ export const data: Array<Course> = [
     id: 3,
     cover: '/images/imagens_leis/3.jpg',
     title: 'Segurança Contra Incêndio',
-    subtitle: 'Decreto nº 63.911/2018',
+    subtitle: 'Decreto nº 69.118/2024',
     status: 'Disponível',
   },
   {
