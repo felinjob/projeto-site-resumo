@@ -44,5 +44,12 @@ export const data: Array<Course> = [
     subtitle: 'Lei nº 5885/1987',
     status: 'Disponível',
   },
+  {
+    id: 7,
+    cover: '/images/imagens_leis/7.jpg',
+    title: 'Aprovação de Projetos de Parcelamento',
+    subtitle: 'Decreto nº 19.226/2016',
+    status: 'Disponível',
+  },
   
 ]
