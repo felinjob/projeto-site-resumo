@@ -21,6 +21,6 @@ export const cronogramaData: CronogramaItem[] = [
   { id: 7, legislacao: 'Decreto nº 19.226/2016', topico: 'Análise, Definição e Aprovação de Projetos de Parcelamento', resumoStatus: 'Disponível', questoesData: '19/05' }, // Data do resumo já passou
   { id: 8, legislacao: 'Lei Estadual nº 10.083/1998', topico: 'Código Sanitário do Estado de São Paulo', resumoStatus: 'Disponível', questoesData: '19/05' }, // Data do resumo já passou
   { id: 9, legislacao: 'LC nº 295/2020', topico: 'Parcelamento, ocupação e uso do solo - APA de Campinas', resumoStatus: 'Disponível', questoesData: '23/05' }, // Data do resumo já passou
-  { id: 10, legislacao: 'Decreto nº 18.705/2015', topico: 'Licenciamento e Controle Ambiental', resumoStatus: 'Disponível', questoesData: '26/05' }, // Data do resumo já passou
+  { id: 10, legislacao: 'Decreto nº 18.705/2015', topico: 'Licenciamento e Controle Ambiental', resumoStatus: '28/04', questoesData: '26/05' }, // Data do resumo já passou
   { id: 11, legislacao: 'LC nº 208/2018', topico: 'Parcelamento, ocupação e uso do solo - Município', resumoStatus: '30/04', questoesData: '26/05' }, // Data do resumo já passou
 ];
