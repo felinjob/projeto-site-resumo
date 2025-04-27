@@ -65,5 +65,12 @@ export const data: Array<Course> = [
     subtitle: 'LC nº 295/2020',
     status: 'Disponível',
   },
+  {
+    id: 10,
+    cover: '/images/imagens_leis/10.jpg',
+    title: 'Licenciamento e Controle Ambiental',
+    subtitle: 'Decreto nº 18.705/2015',
+    status: 'Disponível',
+  },
   
 ]
