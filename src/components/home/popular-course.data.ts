@@ -51,5 +51,19 @@ export const data: Array<Course> = [
     subtitle: 'Decreto nº 19.226/2016',
     status: 'Disponível',
   },
+  {
+    id: 8,
+    cover: '/images/imagens_leis/8.jpg',
+    title: 'Código Sanitário do Estado',
+    subtitle: 'Lei nº 10.083/1998',
+    status: 'Disponível',
+  },
+  {
+    id: 9,
+    cover: '/images/imagens_leis/9.jpg',
+    title: 'Parcelamento, Ocupação e Uso',
+    subtitle: 'LC nº 295/2020',
+    status: 'Disponível',
+  },
   
 ]
