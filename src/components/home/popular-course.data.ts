@@ -61,7 +61,7 @@ export const data: Array<Course> = [
   {
     id: 9,
     cover: '/images/imagens_leis/9.jpg',
-    title: 'Parcelamento, Ocupação e Uso',
+    title: 'Parcelamento, Ocupação e Uso - APA',
     subtitle: 'LC nº 295/2020',
     status: 'Disponível',
   },
@@ -70,6 +70,13 @@ export const data: Array<Course> = [
     cover: '/images/imagens_leis/10.jpg',
     title: 'Licenciamento e Controle Ambiental',
     subtitle: 'Decreto nº 18.705/2015',
+    status: 'Disponível',
+  },
+  {
+    id: 11,
+    cover: '/images/imagens_leis/11.jpg',
+    title: 'Parcelamento, Ocupação e Uso - Município',
+    subtitle: 'LC nº 208/2018',
     status: 'Disponível',
   },
   

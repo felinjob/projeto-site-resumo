@@ -13,26 +13,26 @@ import TableRow from '@mui/material/TableRow';
 import Chip from '@mui/material/Chip';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import QuizIcon from '@mui/icons-material/Quiz'; // Novo ícone para Questões/Vídeos
+// QuizIcon não está sendo usado atualmente para indicar "disponível", mas mantido se precisar para outros estados.
+// import QuizIcon from '@mui/icons-material/Quiz';
 import { styled, useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Grid from '@mui/material/Grid';
 
-// Importar os NOVOS dados do cronograma
-import { cronogramaData as data } from './cronograma.data'; // Verifique o caminho
+import { cronogramaData as data } from './cronograma.data';
 
 // --- Estilizações da Tabela ---
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.primary.light, // Azul claro
+    backgroundColor: theme.palette.primary.light,
     color: theme.palette.text.primary,
     fontWeight: 'bold',
-    fontSize: '0.875rem', // Levemente menor para caber 4 colunas
-    padding: '12px 10px', // Ajustar padding
+    fontSize: '0.875rem',
+    padding: '12px 10px',
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
-    padding: '10px 10px', // Ajustar padding
+    padding: '10px 10px',
   },
 }));
 
@@ -49,22 +49,32 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const HomeCronogramaResumos: FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  // Data de hoje para comparação (03/Abril/2025)
-  // Lembre-se que os meses em JS Date são 0-indexados (Janeiro=0, Abril=3)
-  const hoje = new Date(2025, 3, 3);
+  // A data de hoje é determinada pela data atual do sistema no momento da execução.
+  // Para testes consistentes com datas futuras, você pode mockar ou fixar a data de 'hoje'.
+  const hoje = new Date(); // Usa a data atual real
+  // Ajustar a data de 'hoje' para não ter horas/minutos/segundos para comparação pura de datas
+  hoje.setHours(0, 0, 0, 0);
 
-  // Função auxiliar para verificar se uma data DD/MM (ou 'Disponível') já passou
+
   const isDatePast = (dateStr: string): boolean => {
-    if (dateStr === 'Disponível') return true;
+    if (!dateStr || typeof dateStr !== 'string') return false; // Adicionar verificação para undefined/null ou tipo incorreto
+    if (dateStr.toLowerCase() === 'disponível') return true; // Mantém case-insensitive para 'Disponível'
     const parts = dateStr.split('/');
-    if (parts.length === 2) {
-      const year = hoje.getFullYear(); // Usar ano atual
-      // Criar data SEM hora para comparação segura
-      const dataPrevisao = new Date(year, parseInt(parts[1]) - 1, parseInt(parts[0]));
-      const hojeSemHora = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate());
-      return dataPrevisao < hojeSemHora;
+    if (parts.length === 2 || parts.length === 3) { // Aceita DD/MM ou DD/MM/YYYY
+      const day = parseInt(parts[0]);
+      const month = parseInt(parts[1]) - 1; // Meses são 0-indexados
+      // Se o ano não for fornecido, assume o ano atual de 'hoje'
+      const year = parts.length === 3 ? parseInt(parts[2]) : hoje.getFullYear();
+
+      // Verifica se os componentes da data são números válidos
+      if (isNaN(day) || isNaN(month) || isNaN(year)) return false;
+
+      const dataPrevisao = new Date(year, month, day);
+      dataPrevisao.setHours(0,0,0,0); // Normaliza para comparação de datas
+
+      return dataPrevisao <= hoje; // Alterado para <= para incluir o dia atual como "passado" ou "liberado"
     }
-    return false; // Formato inválido ou ausente
+    return false;
   };
 
   return (
@@ -74,15 +84,14 @@ const HomeCronogramaResumos: FC = () => {
     >
       <Container maxWidth="lg">
         <Typography variant="h2" sx={{ textAlign: 'center', mb: { xs: 4, md: 6 }, fontWeight: 'bold', color: 'primary.main' }}>
-          Cronograma do Material {/* Título Atualizado */}
+          Cronograma do Material
         </Typography>
 
         {isMobile ? (
-          // --- Layout Mobile: Cards Empilhados ---
           <Grid container spacing={2}>
             {data.map((row) => {
-              const resumoEntregue = row.resumoStatus === 'Disponível' || isDatePast(row.resumoStatus);
-              const questoesEntregue = isDatePast(row.questoesData); // Questões só têm data futura no PDF
+              const resumoEntregue = row.resumoStatus?.toLowerCase() === 'disponível' || isDatePast(row.resumoStatus);
+              const questoesEntregue = isDatePast(row.questoesData);
 
               return (
                 <Grid item xs={12} key={row.id}>
@@ -93,20 +102,18 @@ const HomeCronogramaResumos: FC = () => {
                     <Typography variant="body2" sx={{ color: 'text.secondary', my: 0.5 }}>
                       {row.topico}
                     </Typography>
-                    {/* Info Resumo */}
                     <Chip
                       icon={resumoEntregue ? <CheckCircleIcon fontSize="small" /> : <AccessTimeIcon fontSize="small" />}
-                      label={resumoEntregue ? `Resumo: Entregue` : `Resumo: ${row.resumoStatus}`}
+                      label={resumoEntregue ? `Resumo: Entregue` : `Resumo: ${row.resumoStatus || 'N/A'}`}
                       color={resumoEntregue ? 'success' : 'default'}
                       size="small"
                       sx={{ mt: 1, mr: 1 }}
                     />
-                     {/* Info Questões/Vídeos */}
                      <Chip
-                       icon={questoesEntregue ? <QuizIcon fontSize="small" /> : <AccessTimeIcon fontSize="small" />}
-                       label={questoesEntregue ? `Questões: Liberadas` : `Questões: ${row.questoesData}`}
-                       // Usando secundário (amarelo) para indicar que está liberado
-                       color={questoesEntregue ? 'secondary' : 'default'}
+                       icon={questoesEntregue ? <CheckCircleIcon fontSize="small" /> : <AccessTimeIcon fontSize="small" />}
+                       label={questoesEntregue ? `Questões: Liberadas` : `Questões: ${row.questoesData || 'N/A'}`}
+                       // MODIFICADO AQUI: Usar 'success' para consistência visual
+                       color={questoesEntregue ? 'success' : 'default'}
                        size="small"
                        sx={{ mt: 1 }}
                      />
@@ -116,7 +123,6 @@ const HomeCronogramaResumos: FC = () => {
             })}
           </Grid>
         ) : (
-          // --- Layout Desktop: Tabela ---
           <TableContainer component={Paper} sx={{ boxShadow: 2, borderRadius: '8px', overflowX: 'auto' }}>
             <Table sx={{ minWidth: 750 }} aria-label="cronograma do material">
               <TableHead>
@@ -127,13 +133,13 @@ const HomeCronogramaResumos: FC = () => {
                     Resumo (PDF)
                   </StyledTableCell>
                   <StyledTableCell align="center" sx={{ width: '20%', whiteSpace: 'nowrap' }}>
-                    Questões/Vídeos {/* Nova Coluna */}
+                    Questões/Vídeos
                   </StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {data.map((row) => {
-                  const resumoEntregue = row.resumoStatus === 'Disponível' || isDatePast(row.resumoStatus);
+                  const resumoEntregue = row.resumoStatus?.toLowerCase() === 'disponível' || isDatePast(row.resumoStatus);
                   const questoesEntregue = isDatePast(row.questoesData);
                   return (
                     <StyledTableRow key={row.id}>
@@ -141,21 +147,20 @@ const HomeCronogramaResumos: FC = () => {
                         {row.legislacao}
                       </TableCell>
                       <TableCell>{row.topico}</TableCell>
-                      {/* Célula Status Resumo */}
                       <TableCell align="center">
                         <Chip
                           icon={resumoEntregue ? <CheckCircleIcon /> : <AccessTimeIcon />}
-                          label={row.resumoStatus}
+                          label={row.resumoStatus || 'N/A'}
                           color={resumoEntregue ? 'success' : 'default'}
                           size="small"
                         />
                       </TableCell>
-                       {/* Célula Status Questões/Vídeos */}
                       <TableCell align="center">
                          <Chip
-                           icon={questoesEntregue ? <QuizIcon /> : <AccessTimeIcon />}
-                           label={row.questoesData}
-                           color={questoesEntregue ? 'secondary' : 'default'} // Amarelo ou cinza
+                           icon={questoesEntregue ? <CheckCircleIcon /> : <AccessTimeIcon />}
+                           label={row.questoesData || 'N/A'}
+                           // MODIFICADO AQUI: Usar 'success' para consistência visual
+                           color={questoesEntregue ? 'success' : 'default'}
                            size="small"
                          />
                       </TableCell>
