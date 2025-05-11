@@ -78,7 +78,7 @@ const HomeCompraFinal: FC = () => {
             component="h6" // Mantenha o component="h6" (ou ajuste se precisar)
             sx={{ fontWeight: 'bold', mt: 4, mb: 2, color: 'primary.dark' }}
           >
-            É engenheiro, temos uma opção para você!
+            É engenheiro? Temos uma opção para você!
           </Typography>
 
           {/* Novo Bloco: Engenharia Civil (Conteúdo) */}
