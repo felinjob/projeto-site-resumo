@@ -84,11 +84,7 @@ const HomeCompraFinal: FC = () => {
           {/* Novo Bloco: Engenharia Civil (Conteúdo) */}
           <Box sx={{ mb: 4, textAlign: 'center' }}>
             <Typography variant="body2" sx={{ mb: 2, color: 'text.secondary', fontSize: '1.1rem' }}>
-              Você aprovado em uma das Prefeituras que mais nomeiam no país!
-              Acesso a 3 Legislações atualizadas para o cargo de Engenheiro Civil (Edital 01/2025): Plano Diretor, Código de Obras e Lei de Parcelamento, Ocupação e Uso do solo
-              Resumos esquematizados por Arquitetos aprovados no último edital
-              Questões inéditas da legislação específica
-              Resoluções de questões em vídeo
+              Acesso a 3 Legislações atualizadas para o cargo de Engenheiro Civil (Edital 01/2025): Plano Diretor, Código de Obras e Lei de Parcelamento, Ocupação e Uso do solo.
             </Typography>
             {/* Bloco de Preço para Engenharia (Igual ao de Arquitetura) */}
             <Box sx={{ mb: 4 }}>
